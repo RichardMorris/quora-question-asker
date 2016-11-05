@@ -35,9 +35,11 @@ function parseLogPage(doc) {
 	}
 }
 
-    renderStatus(document.URL);
-    console.log('loaded');
-    getPageUrl(document.URL+'/log', 
+var url = window.location.origin + window.location.pathname + '/log';
+
+renderStatus(url);
+
+getPageUrl(url, 
     	function(doc) {
     		parseLogPage(doc);
 
