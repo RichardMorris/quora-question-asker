@@ -30,6 +30,11 @@ function parseLogPage(doc) {
 	}
 	console.log(res);
 	if(res) {
+		var bar = res.parentElement.parentElement.children[1].cloneNode(true);
+     		var txt = bar.childNodes[bar.childNodes.length-1].wholeText;
+        	var spn = document.createTextNode(" " + txt);
+        	res.appendChild(spn);
+
 		var title = document.getElementsByClassName("question_qtext")[0];
 		title.appendChild(res);
 	}
