@@ -43,15 +43,6 @@ function parseLogPage(doc) {
 		res.style = 'color : rgb(153, 153, 153); font-size : 13px;';
 		res.getElementsByClassName('user')[0].style = 'color : rgb(153, 153, 153); text-decoration : underline;';
 
-		// Add below the title in main webpage
-		var bar = res.parentElement.parentElement.children[1].cloneNode(true);
-     		var txt = bar.childNodes[bar.childNodes.length-1].wholeText;
-        	var spn = document.createTextNode(" " + txt);
-        	res.appendChild(spn);
-
-    res.style = 'color : rgb(153, 153, 153); font-size : 13px;';
-    res.getElementsByClassName('user')[0].style = 'color : rgb(153, 153, 153); text-decoration : underline;';
-
 		var title = document.getElementsByClassName("question_qtext")[0];
 		title.appendChild(res);
 	}
