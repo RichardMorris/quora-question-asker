@@ -1,49 +1,62 @@
+// Request URL with callback functions
 function getPageUrl(url, callback, errorCallback) {
-  console.log("getPageUrl",url);
-  var x = new XMLHttpRequest();
-  x.open('GET', url);
-  x.responseType = 'document';
-  x.onload = function() {
-    // Parse and process the response.
-    var response = x.response;
-    callback(response);
-  };
-  x.onerror = function() {
-    errorCallback('Network error.');
-  };
-  x.send();
+	var x = new XMLHttpRequest();
+	x.open('GET', url);
+	x.responseType = 'document';
+	x.onload = function() {
+		// Parse and process the response.
+		callback(x.response);
+	};
+	x.onerror = function() {
+		errorCallback('Network error.');
+	};
+	x.send();
 }
 
-function renderStatus(statusText) {
+// Display a log message
+function logStatus(statusText) {
 	console.log(statusText);
-	//  document.getElementById('status').textContent = statusText;
+	// document.getElementById('status').textContent = statusText;
 }
 
+// Parse the Quora Question log page
 function parseLogPage(doc) {
-	var items = doc.getElementsByClassName('feed_item_activity');
+	// Find the element with name of who asked the question
 	var re = /Question added by/;
+	var items = doc.getElementsByClassName('feed_item_activity');
 	var res = null;
-	for(var i=0; i< items.length;++i ) {
-		console.log(items[i].innerText);
-		if(re.test(items[i].innerText))
+	for (var i = 0; i < items.length; ++i) {
+		if (re.test(items[i].innerText)) {
 			res = items[i];
+			break;
+		}
 	}
-	console.log(res);
-	if(res) {
+
+	if (res) {
+		// Get the date the question was added
+		var details = res.parentElement.parentElement.children[1].cloneNode(true);
+		var txt = details.childNodes[details.childNodes.length - 1].wholeText;
+		var spn = document.createTextNode(" " + txt);
+		res.appendChild(spn);
+
+		// Add styles, light grey small font size, username underlined
+		res.style = 'color : rgb(153, 153, 153); font-size : 13px;';
+		res.getElementsByClassName('user')[0].style = 'color : rgb(153, 153, 153); text-decoration : underline;';
+
+		// Add below the title in main webpage
 		var title = document.getElementsByClassName("question_qtext")[0];
 		title.appendChild(res);
 	}
 }
 
+// URL for log file with the required details
 var url = window.location.origin + window.location.pathname + '/log';
 
-renderStatus(url);
+logStatus(url);
 
-getPageUrl(url, 
-    	function(doc) {
-    		parseLogPage(doc);
-
-    	},
-    	function(errorMessage) {
-    		renderStatus('Cannot get page. ' + errorMessage);
-    	});
+// 
+getPageUrl(url, function(doc) {
+	parseLogPage(doc);
+	}, function(errorMessage) {
+		logStatus('Cannot get page. ' + errorMessage);
+	});
