@@ -41,7 +41,9 @@ function parseLogPage(doc) {
 
 		// Add styles, light grey small font size, username underlined
 		res.style = 'color : rgb(153, 153, 153); font-size : 13px;';
-		res.getElementsByClassName('user')[0].style = 'color : rgb(153, 153, 153); text-decoration : underline;';
+		var userele = res.getElementsByClassName('user')[0];
+		if(userele)
+			userele.style = 'color : rgb(153, 153, 153); text-decoration : underline;';
 
 		var title = document.getElementsByClassName("question_qtext")[0];
 		title.appendChild(res);
