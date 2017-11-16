@@ -45,11 +45,8 @@ function parseLogPage(doc) {
 		// Add styles, light grey small font size, username underlined
 		res.style = 'color : rgb(153, 153, 153); font-size : 13px;';
 		var userele = res.getElementsByClassName('user')[0];
-<<<<<<< HEAD
+
 		if (userele)
-=======
-		if(userele)
->>>>>>> branch 'master' of https://github.com/RichardMorris/quora-question-asker.git
 			userele.style = 'color : rgb(153, 153, 153); text-decoration : underline;';
 
 		var title = document.getElementsByClassName("question_qtext")[0];
