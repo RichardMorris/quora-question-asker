@@ -19,8 +19,18 @@ function logStatus(statusText) {
 	// document.getElementById('status').textContent = statusText;
 }
 
-// Parse the Quora Question log page
 function parseLogPage(doc) {
+	console.log(doc);
+	let items = doc.getElementsByTagName('a');
+	console.log(items);
+	for (var i = 0; i < items.length; ++i) {
+		let item = items[i];
+		logStatus(item);
+	}
+}
+
+// Parse the Quora Question log page
+function parseLogPage_old(doc) {
 	// Find the element with name of who asked the question
 	var re = /Question added by/;
 	var items = doc.getElementsByClassName('feed_item_activity');

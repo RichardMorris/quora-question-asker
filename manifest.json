@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Quora Question Asker",
   "description": "Finds our who asked the question on quora",
-  "version": "1.0",
-  
+  "version": "1.1",
+
   "content_scripts": [
     {
       "matches": ["https://www.quora.com/*"],
@@ -13,6 +13,5 @@
     } ],
     
   "permissions": [
-    "https://ajax.googleapis.com/"
   ]
 }
